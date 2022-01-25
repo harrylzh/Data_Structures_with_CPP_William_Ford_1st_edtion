@@ -34,8 +34,8 @@ class Word
       int operator< (const Word& w) const;
       
       // Word stream operators
-      friend istream& operator>> (istream& istr, Word& w);
-      friend ostream& operator<< (ostream& ostr, Word& w);
+      friend std::istream& operator>> (std::istream& istr, Word& w);
+      friend std::ostream& operator<< (std::ostream& ostr, Word& w);
 };
 
 // constructor. set count to 0 and lastLineNo to 0
@@ -77,7 +77,7 @@ int Word::operator< (const Word& w) const
 }
 
 // input a Word object from a stream
-istream& operator>> (istream& istr, Word& w)
+std::istream& operator>> (std::istream& istr, Word& w)
 {
    // read characters from istr into wd
    char c, wd[20];
@@ -120,21 +120,21 @@ istream& operator>> (istream& istr, Word& w)
 }
 
 // output a Word object to a stream
-ostream& operator<< (ostream& ostr, Word& w)
+std::ostream& operator<< (std::ostream& ostr, Word& w)
 {  
    // output the word
    ostr << w.wordText;
    
    // output count right justified with leading '.' characters
    ostr.fill('.');
-   ostr << setw(25-w.wordText.Length()) << w.count << ": ";
+   ostr << std::setw(25-w.wordText.Length()) << w.count << ": ";
    ostr.fill(' ');      // set fill char back to blank
    
    // traverse the list and print the line numbers
    for(w.lineNumbers.Reset(); !w.lineNumbers.EndOfList(); 
                                         w.lineNumbers.Next())
       ostr << w.lineNumbers.Data() << "    ";
-   ostr << endl;
+   ostr << std::endl;
    
    return ostr;
 }

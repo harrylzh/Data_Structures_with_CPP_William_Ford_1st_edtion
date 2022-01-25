@@ -67,15 +67,15 @@ int main(void)
     for(int i=0;i < 2000;i++)
         A[i] = B[i] = C[i] = rnd.Random(10000);
         
-    TimeSort(A,2000,"Heap sort",heap);
+    TimeSort(A,2000,(char*)"Heap sort",heap);
     delete [] A;
     
     // repeat process for the tournament sort
-    TimeSort(B,2000,"Tournament sort",tournament);
+    TimeSort(B,2000,(char*)"Tournament sort",tournament);
     delete [] B;
   
     // repeat process for the exchange sort
-    TimeSort(C,2000,"Exchange sort",exchange);
+    TimeSort(C,2000,(char*)"Exchange sort",exchange);
     delete [] C;
 }
 

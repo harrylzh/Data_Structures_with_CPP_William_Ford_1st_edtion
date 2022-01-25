@@ -44,7 +44,7 @@ int main(void)
 {
 	Graph<char> G;
 	
-	G.ReadGraph("warshall.dat");
+	G.ReadGraph((char*)"warshall.dat");
 	
 	cout << "The reachability matrix is:" << endl;
 	Warshall(G);

@@ -138,12 +138,12 @@ void RunTest(int n, Ordering order)
 // 20000 data items.
 int main(void)
 {
-    // int nelts[5] = {4000,8000,10000,15000,20000},i;
+    int nelts[5] = {4000,8000,10000,15000,20000},i;
 
 	// values of n that will work under Windows 3.1. there
 	// is a heap size limitation that is exceeded with the
 	// values used in the text
-    int nelts[5] = {400,800,1000,1500,2000},i;
+    // int nelts[5] = {400,800,1000,1500,2000},i;
     
     cout.precision(3);
     cout.setf(ios::fixed | ios::showpoint);

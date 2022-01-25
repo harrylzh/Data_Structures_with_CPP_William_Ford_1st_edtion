@@ -13,7 +13,7 @@ int main(void)
     String  S;
     
     // input the vertices for transportation graph
-    G.ReadGraph("airline.dat"); 
+    G.ReadGraph((char*)"airline.dat"); 
     
     // prompt for the departure city
     cout << "Give the minimum distance when departing from ";

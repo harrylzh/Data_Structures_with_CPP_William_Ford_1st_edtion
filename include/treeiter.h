@@ -61,7 +61,7 @@ template <class T>
 InorderIterator<T>::InorderIterator(TreeNode<T> *tree):
       Iterator<T>(), root(tree)
 {
-   iterationComplete = (root == NULL);
+   this->iterationComplete = (root == NULL);
    current = GoFarLeft(root);
 }
 
@@ -69,7 +69,7 @@ template <class T>
 void InorderIterator<T>::Next(void)
 {  
    // error if we have already visited all the nodes
-   if (iterationComplete)
+   if (this->iterationComplete)
    {
       std::cerr << "Next: iterator has passed the end of list!"
           << std::endl;
@@ -90,7 +90,7 @@ void InorderIterator<T>::Next(void)
    // no right branch of current node and no stacked nodes.
    // the traversal is complete
    else
-      iterationComplete = 1;
+      this->iterationComplete = 1;
 }
 
 // reset the traversal to the first tree node
@@ -102,7 +102,7 @@ void InorderIterator<T>::Reset(void)
    
    // reassign iterationComplete and current the address of
    // the first node in the inorder scan
-   iterationComplete = (root == NULL);
+   this->iterationComplete = (root == NULL);
    current = GoFarLeft(root); // go back to 1st node inorder
 }
 
@@ -111,7 +111,7 @@ template <class T>
 T& InorderIterator<T>::Data(void)
 {
    // error if tree empty or we have completed traversal
-   if (root == NULL || iterationComplete)
+   if (root == NULL || this->iterationComplete)
    {
       std::cerr << "Data: invalid reference!" << std::endl;
       exit(1);
@@ -128,7 +128,7 @@ void InorderIterator<T>::SetTree(TreeNode<T> *tree)
    // assign new tree root. initialize iterationComplete.
    // assign current the address of first node in the scan
    root = tree;
-   iterationComplete = (root == NULL);
+   this->iterationComplete = (root == NULL);
    current = GoFarLeft(root); // go to 1st node inorder
 }
 

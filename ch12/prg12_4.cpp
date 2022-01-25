@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#prama hdrstop
+#pragma hdrstop
 
 // SeqList class inherited from List. includes SeqListIterator
 #include "seqlist2.h"

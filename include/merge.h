@@ -191,8 +191,8 @@ template <class T>
 void MergeSort(BinFile<T> &fC, int blockSize)
 {
    // temporary file to split the runs from fC
-   BinFile<T> fA("fileA", INOUT); 
-   BinFile<T> fB("fileB", INOUT);
+   BinFile<T> fA((char*)"fileA", INOUT); 
+   BinFile<T> fB((char*)"fileB", INOUT);
    
    // the total size of the file and the blockSize
    int size = int(fC.Size()), n = blockSize;

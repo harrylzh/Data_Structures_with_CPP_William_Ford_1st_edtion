@@ -15,25 +15,25 @@ ostream& operator<< (ostream& ostr, const Days& d)
 	switch(d)
 	{
 		case Sun:
-			day = "Sun";
+			day = (char*)"Sun";
 			break;
 		case Mon:
-			day = "Mon";
+			day = (char*)"Mon";
 			break;
 		case Tues:
-			day = "Tues";
+			day = (char*)"Tues";
 			break;
 		case Wed:
-			day = "Wed";
+			day = (char*)"Wed";
 			break;
 		case Thurs:
-			day = "Thurs";
+			day = (char*)"Thurs";
 			break;
 		case Fri:
-			day = "Fri";
+			day = (char*)"Fri";
 			break;
 		case Sat:
-			day = "Sat";
+			day = (char*)"Sat";
 			break;
 	}
 	// output the string
@@ -70,19 +70,19 @@ istream& operator>> (istream& istr, Days& d)
 	} 
 	
 	// compare value with the enum strings	
-	if (value == "Sun")
+	if (value == (char*)"Sun")
 		d = Sun;
-	else if (value == "Mon")
+	else if (value == (char*)"Mon")
 		d = Mon;
-	else if (value == "Tues")
+	else if (value == (char*)"Tues")
 		d = Tues;
-	else if (value == "Wed")
+	else if (value == (char*)"Wed")
 		d = Wed;
-	else if (value == "Thurs")
+	else if (value == (char*)"Thurs")
 		d = Thurs;
-	else if (value == "Fri")
+	else if (value == (char*)"Fri")
 		d = Fri;
-	else if (value == "Sat")
+	else if (value == (char*)"Sat")
 		d = Sat;
 	else
 		// flag a stream error

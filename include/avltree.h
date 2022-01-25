@@ -47,7 +47,7 @@ class AVLTreeNode: public TreeNode<T>
 template <class T>
 AVLTreeNode<T>* & AVLTreeNode<T>::Left(void)
 {
-   return (AVLTreeNode<T> *)left;
+   return (AVLTreeNode<T> * &)this->left;
 }
 
 // return a reference to right after casting it to an
@@ -55,7 +55,7 @@ AVLTreeNode<T>* & AVLTreeNode<T>::Left(void)
 template <class T>
 AVLTreeNode<T>* & AVLTreeNode<T>::Right(void)
 {
-   return (AVLTreeNode<T> *)right;
+   return (AVLTreeNode<T> * &)this->right;
 }
 
 
@@ -71,14 +71,14 @@ AVLTreeNode<T>::AVLTreeNode (const T& item,
 template <class T>
 AVLTreeNode<T>* AVLTreeNode<T>::Left(void) const
 {
-   return (AVLTreeNode<T> *)left;
+   return (AVLTreeNode<T> *)this->left;
 }
 
 // return right after casting it to an AVLTreeNode pointer
 template <class T>
 AVLTreeNode<T>* AVLTreeNode<T>::Right(void) const
 {
-   return (AVLTreeNode<T> *)right;
+   return (AVLTreeNode<T> *)this->right;
 }
 
 template <class T>
@@ -334,7 +334,7 @@ void AVLTree<T>::Insert(const T& item)
 
    // declare AVL tree node pointer. using base class method
    // GetRoot, cast to larger node and assign root pointer
-   AVLTreeNode<T> *treeRoot = (AVLTreeNode<T> *)GetRoot(),
+   AVLTreeNode<T> *treeRoot = (AVLTreeNode<T> *)this->GetRoot(),
                *newNode;
    
    // flag used by AVLInsert to rebalance nodes
@@ -348,9 +348,9 @@ void AVLTree<T>::Insert(const T& item)
    
    // assign new values to data members root, size
    // current in the base class
-   root = treeRoot;
-   current = newNode;
-   size++;
+   this->root = treeRoot;
+   this->current = newNode;
+   this->size++;
 }
 
 template <class T>
@@ -447,18 +447,18 @@ AVLTree<T>::AVLTree(void): BinSTree<T>()
 template <class T>
 AVLTree<T>::AVLTree(const AVLTree<T>& tree)
 {
-   root=(TreeNode<T> *)CopyTree((AVLTreeNode<T> *)tree.root);
-   current = root;
-   size = tree.size;
+   this->root=(TreeNode<T> *)CopyTree((AVLTreeNode<T> *)tree.root);
+   this->current = this->root;
+   this->size = tree.size;
 }
 
 template <class T>
 AVLTree<T>& AVLTree<T>::operator= (const AVLTree<T>& tree)
 {
-   ClearList();
-   root=(TreeNode<T> *)CopyTree((AVLTreeNode<T> *)tree.root);
-   current = root;
-   size = tree.size;
+   this->ClearList();
+   this->root=(TreeNode<T> *)CopyTree((AVLTreeNode<T> *)tree.root);
+   this->current = this->root;
+   this->size = tree.size;
    return *this;
 }
 

@@ -4,6 +4,7 @@
 typedef int DataType;
 
 #include "astack.h"
+#include "lzhtools.h"
 using namespace std;
 
 // print integer num in base B
@@ -35,7 +36,7 @@ int main(void)
              << "(2<=B<=9): ";
         cin >> num >> B;
         cout << num << " base " << B << " is ";
-        MultibaseOutput(num, B);
+        MultibaseOutput(num, B);        
         cout << endl;
     }
 }

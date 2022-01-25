@@ -13,7 +13,7 @@ int main(void)
     ifstream fin;
     NameRecord rec;
     String token;
-    HashTable<NameRecord> HF(101,hash);
+    HashTable<NameRecord> HF(101,hashRecord);
     
     fin.open("strings.dat", ios::in );
     if (!fin)
@@ -62,4 +62,3 @@ Napoleon: 1
 Grant: 2
 Columbus: 2
 */
-

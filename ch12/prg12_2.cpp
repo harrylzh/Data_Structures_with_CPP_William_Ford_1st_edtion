@@ -6,9 +6,9 @@
 using namespace std;
 int main(void)
 {
-    Animal A("reptile"), *p;
-    Cat C("domestic", "warm blooded");
-    Tiger T("bengal", "wild", "meat eating");
+    Animal A((char*)"reptile"), *p;
+    Cat C((char*)"domestic", (char*)"warm blooded");
+    Tiger T((char*)"bengal", (char*)"wild", (char*)"meat eating");
     
     // static binding. Announce1 has value Animal parameter.
     // since T is a Tiger, function executes Animal Identify

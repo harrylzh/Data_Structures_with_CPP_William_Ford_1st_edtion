@@ -24,7 +24,7 @@ class String
 
     public:
         // constructors
-        String(char *s = "");
+        String(char *s = (char*)"");
         String(const String& s);
         
         // destructor

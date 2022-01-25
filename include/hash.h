@@ -66,7 +66,7 @@ void HashTable<T>::Insert(const T& key)
    // data corresponding to key is not found. add item to list
    lst.InsertRear(key);
    current = &lst.Data();
-   size++;
+   this->size++;
 }
 
 template <class T>
@@ -100,7 +100,7 @@ void HashTable<T>::Delete(const T& key)
       {
          lst.DeleteAt();
          current = &lst.Data();
-         size--;
+         this->size--;
          return;
       }
 }
@@ -110,7 +110,7 @@ void HashTable<T>::ClearList(void)
 {     
    for(int i=0;i < numBuckets;i++)
       buckets[i].ClearList();
-   size = 0;
+   this->size = 0;
    current = NULL;
 }
 
@@ -199,13 +199,13 @@ void HashTableIterator<T>::Next(void)
       
    // set the iterationComplete flag to check if currentBucket 
    // index is at end of list, 
-   iterationComplete = currentBucket == -1;
+   this->iterationComplete = currentBucket == -1;
 }
 
 template <class T>
 void HashTableIterator<T>::Reset(void)
 {
-   iterationComplete = hashTable->ListEmpty();
+   this->iterationComplete = hashTable->ListEmpty();
    SearchNextNode(0);
 }
 

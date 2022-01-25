@@ -39,12 +39,12 @@ T& Dictionary<K,T>::operator[] (const K& index)
    KeyValue<K,T> targetKey(index,defaultValue);
 
    // search for key. if not found, insert targetKey
-   if(!Find(targetKey))
-      Insert(targetKey);
+   if(!this->Find(targetKey))
+      this->Insert(targetKey);
       
    // return reference to data value found or inserted.
    // current is maintained by the BinSTree class
-   return current->data.value;
+   return this->current->data.value;
 }
 
 // see if KeyValue object exists with given key

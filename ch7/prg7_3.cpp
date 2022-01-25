@@ -30,11 +30,11 @@ void error(int n)
 {
     // table gives the different error messages
     static char *errormsgs[] = {
-                    "Operator expected",
-                    "Operand expected",
-                    "Missing left parenthesis",
-                    "Missing right parenthesis",
-                    "Invalid input"
+                    (char*)"Operator expected",
+                    (char*)"Operand expected",
+                    (char*)"Missing left parenthesis",
+                    (char*)"Missing right parenthesis",
+                    (char*)"Invalid input"
                 };
                         
     // the parameter n is an error message index

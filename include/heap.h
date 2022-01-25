@@ -134,10 +134,10 @@ template <class T>
 Heap<T>::Heap(int size)
 {  
    if (size <= 0) 
-      error("Bad list size.");
+      error((char*)"Bad list size.");
    hlist = new T[size];
    if (hlist == 0)
-      error("Memory allocation failure."); 
+      error((char*)"Memory allocation failure."); 
    maxheapsize = size;
    heapsize = 0;
    inArray = 0;
@@ -152,7 +152,7 @@ Heap<T>::Heap(T arr[],int n)
 
    // n <= 0 is invalid array size; terminate program
    if (n <= 0) 
-      error("Bad list size.");
+      error((char*)"Bad list size.");
       
    // use n to set heap size and maximum heap size; assign
    // the arrary arr to the heap list     
@@ -250,7 +250,7 @@ void Heap<T>::Insert(const T& item)
 {
    // check for a full heap and terminate if True
    if (heapsize == maxheapsize)
-      error("Heap full");
+      error((char*)"Heap full");
    // store the item at the end of the heap and increment 
    // heapsize;   call FilterUp to restore the heap condition
    hlist[heapsize] = item; 
@@ -268,7 +268,7 @@ T Heap<T>::Delete(void)
 
    // check for an empty heap
    if (heapsize == 0)
-      error("Heap empty"); 
+      error((char*)"Heap empty"); 
 
    // copy the root to tempitem; replace the root with the last
    // value in the heap and decrement the heap size

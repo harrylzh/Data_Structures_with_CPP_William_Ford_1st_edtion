@@ -49,7 +49,7 @@ int main(void)
     ifstream fin;
     String word, definition;
     // the dictionary
-    Dictionary<String,String> wordDictionary("");
+    Dictionary<String,String> wordDictionary((char*)"");
   
     // open the file "defs.dat" of words and their definitions
     fin.open("defs.dat",ios::in );

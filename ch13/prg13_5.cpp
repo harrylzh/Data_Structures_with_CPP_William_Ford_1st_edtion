@@ -9,7 +9,7 @@ int main(void)
 {
 	Graph<char> G;
 
-	G.ReadGraph("sctest.dat");
+	G.ReadGraph((char*)"sctest.dat");
 
 	cout << "Strong Components:" << endl;
 	ConnectedComponent(G);

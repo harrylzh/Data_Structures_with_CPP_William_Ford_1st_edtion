@@ -25,13 +25,13 @@ void OrderedList<T>::Insert(const T& item)
 {
    // use the linked list traversal mechanism to locate the
    // insertion point
-   for(llist.Reset();!llist.EndOfList();llist.Next())
-      if (item < llist.Data())
+   for(this->llist.Reset();!this->llist.EndOfList();this->llist.Next())
+      if (item < this->llist.Data())
          break;
          
    // insert item at the current list location
-   llist.InsertAt(item);
-   size++;
+   this->llist.InsertAt(item);
+   this->size++;
 }
 
 #endif   // ORDERED_LIST_CLASSS

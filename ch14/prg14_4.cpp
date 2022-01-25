@@ -51,7 +51,7 @@ void  LoadFile(BinFile<int> &f, int n)
 int main(void)
 {
     // fC is initialized with random data and sorted
-    BinFile<int> fC("fileC", INOUT);
+    BinFile<int> fC((char*)"fileC", INOUT);
 
     // create a file with 1000 random integer values
     LoadFile(fC,1000);

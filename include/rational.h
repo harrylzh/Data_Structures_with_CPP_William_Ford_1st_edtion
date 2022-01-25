@@ -27,8 +27,8 @@ class Rational
       // rational input/output
       friend std::istream& operator>> (std::istream& istr,
                                   Rational &r);
-      friend std::istream& operator<< (std::istream& ostr,
-                                  const Rational& d);
+      friend std::ostream& operator<< (std::ostream& ostr,
+                                 const  Rational& d);
   
       // binary operators: add, subtract, multiply, divide
       Rational operator+ (Rational r) const; 
@@ -141,9 +141,9 @@ std::istream& operator >> (std::istream& istr, Rational& r)
 }
 
 // overload stream output operator. output in form P/Q 
-std::istream& operator << (std::istream& ostr, const Rational& r)
+std::ostream& operator << (std::ostream& ostr,const Rational& r)
 {
-   // as a friend, ">>" can access numerator/denominator of r
+   // as a friend, ">>" can access numerator/denominator of r   
    ostr << r.num << '/' << r.den;
    return ostr;
 }

@@ -3,7 +3,7 @@
 
 #include "random.h"
 #include "binfile.h"
-using namespace std;s
+using namespace std;
 const long Empty = -1;
 
 // a node that stores a data record in a file
@@ -59,7 +59,7 @@ int main(void)
     int i, item, request;
     
     // open file "DRfile" with I/O access
-    BinFile<FileDataRecord> dataFile("DRfile", INOUT);
+    BinFile<FileDataRecord> dataFile((char*)"DRfile", INOUT);
     
     // initialize the table to have empty entries
     for(i = 0; i < 10; i++)

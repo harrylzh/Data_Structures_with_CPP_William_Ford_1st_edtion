@@ -107,7 +107,8 @@ class WindowList
 // get first free window from available window list 
 int WindowList::GetWindowNumber(void)
 {
-    for(int i=0;i < 10;i++)
+    int i = 0;
+    for(i;i < 10;i++)
         // if it is available, select it
         // set the window to be unavailable. 
         if (windAvail[i])
@@ -123,7 +124,7 @@ void WindowList::PrintWindowList(void)
 {    
     for(windList.Reset(); !windList.EndOfList(); 
                                     windList.Next())
-        cout << windList.Data();
+        std::cout << windList.Data();
 }
 
 // get a new window and give it the name 'untitled'
@@ -132,12 +133,12 @@ void WindowList::New(void)
     // check if a window is available.  if not quietly return
     if (windCount == 10)
     {
-        cerr << "No more windows available until one is closed.\n";
+        std::cerr << "No more windows available until one is closed.\n";
         return;
     }
     
     // get a new 'Untitled' window by calling GetWindowNumber
-    Window win("Untitled", GetWindowNumber());
+    Window win((char*)"Untitled", GetWindowNumber());
     
     // make it active by inserting it in the front of the list
     windList.InsertFront(win);
@@ -206,31 +207,31 @@ int WindowList::FindAndDelete(Window& wind)
 
 void WindowList::Activate(int windownum)
 {
-    Window win("Dummy Name", windownum);
+    Window win((char*)"Dummy Name", windownum);
 
     if (FindAndDelete(win))
         windList.InsertFront(win);
     else
-        cerr << "Incorrect window number.\n";
+        std::cerr << "Incorrect window number.\n";
 }
 
 void WindowList::SelectItem(int& item, String& name)
 {
     char selectchar, s[2];
 
-    cout << "New";
+    std::cout << "New";
     if (windCount > 0)
     {
-        cout << "  Close";
-        cout << "  Close All";
-        cout << "  Save As";
+        std::cout << "  Close";
+        std::cout << "  Close All";
+        std::cout << "  Save As";
     }
-    cout << "  Quit";
+    std::cout << "  Quit";
     if(windCount > 0)
         PrintWindowList();
-    cout << ": ";
+    std::cout << ": ";
 
-    cin >> selectchar;
+    std::cin >> selectchar;
     selectchar = tolower(selectchar);
     if (isdigit(selectchar))
     {
@@ -243,29 +244,27 @@ void WindowList::SelectItem(int& item, String& name)
         switch(selectchar)
         {
             case 'n':   item = 1;
-                        name = "New";
+                        name = (char*)"New";
                         break;
                 
             case 'c':   item = 2;
-                        name = "Close";
+                        name = (char*)"Close";
                         break;
                 
             case 'a':   item = 3;
-                        name = "Close All";
+                        name = (char*)"Close All";
                         break;
                 
             case 's':   item = 4;
-                        name = "Save As";
+                        name = (char*)"Save As";
                         break;
                 
             case 'q':   item = 5;
-                        name = "Quit";
+                        name = (char*)"Quit";
                         break;
                         
-            default:    cerr << "Not a valid menu selection." << endl;
+            default:    std::cerr << "Not a valid menu selection." << std::endl;
                         item = 0;
                         break;
         }
 }
-
-

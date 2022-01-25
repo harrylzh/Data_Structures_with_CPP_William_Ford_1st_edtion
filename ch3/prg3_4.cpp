@@ -10,7 +10,7 @@ int main (void)
     // Date objects with integer, default and string parmeters
     Date day1(6,6,44);          // June 6, 1944
     Date day2;                  // January 1, 1900
-    Date day3("12/31/99");      //  December 31, 1999  
+    Date day3((char *)"12/31/99");      //  December 31, 1999  
     
     
     cout << "D-Day in World War II - ";
@@ -21,7 +21,7 @@ int main (void)
     cout << endl;                   
     cout << "The last day in the 20th century - ";
     day3.PrintDate();
-    cout << endl;                   
+    cout << endl;             
 }
 
 /*

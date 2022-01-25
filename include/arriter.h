@@ -60,7 +60,7 @@ void ArrayIterator<T>::Reset(void)
    currentIndex = startIndex;
    
    // the iteration is not complete yet
-   iterationComplete = 0;
+   this->iterationComplete = 0;
 }
 
 // return the value of the current array element
@@ -68,7 +68,7 @@ template <class T>
 T& ArrayIterator<T>::Data(void)
 {
    // can't call Data if have traversed entire array
-   if(iterationComplete)
+   if(this->iterationComplete)
    {
       std::cerr << "Iterator has passed the end of the list!"
            << std::endl;
@@ -84,11 +84,11 @@ void ArrayIterator<T>::Next(void)
 {
    // if iteration is not complete, increment currentIndex.
    // if it passes finishIndex, the iteration is complete
-   if (!iterationComplete)
+   if (!this->iterationComplete)
    {
        currentIndex++;
        if(currentIndex > finishIndex)
-          iterationComplete = 1;
+          this->iterationComplete = 1;
    }
 }
 

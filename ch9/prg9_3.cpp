@@ -9,7 +9,7 @@
 #include "studinfo.h"
 using namespace std;
 
-void main(void)
+int main(void)
 {
     Node<StudentRecord> *graduateList=NULL,
                         *currPtr, *prevPtr,
@@ -63,7 +63,7 @@ void main(void)
     }
     fin.close();
     
-    fin.open("noattend",ios::in | ios::nocreate);
+    fin.open("noattend",ios::in );
     if (!fin)
     {
         cerr << "Cannot open file noattend." << endl;

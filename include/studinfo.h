@@ -12,7 +12,7 @@ int operator!= (const StudentRecord& s,
 	return s.name != t.name;
 }
 
-istream& operator>> (istream& istr, StudentRecord& srec)
+std::istream& operator>> (std::istream& istr, StudentRecord& srec)
 {
 	srec.name.ReadString(istr);	
 	istr >> srec.gpa;
@@ -20,7 +20,7 @@ istream& operator>> (istream& istr, StudentRecord& srec)
 	return istr;
 }
 
-ostream& operator<< (ostream& ostr, const StudentRecord& srec)
+std::ostream& operator<< (std::ostream& ostr, const StudentRecord& srec)
 {
 	ostr << srec.name << "  " <<  srec.gpa;
 	return ostr;

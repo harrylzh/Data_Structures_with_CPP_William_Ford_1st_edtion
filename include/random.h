@@ -1,7 +1,7 @@
 #ifndef RANDOM_NUMBER_GENERATOR
 #define RANDOM_NUMBER_GENERATOR
 
-#include <time.h>
+#include <ctime>
 
 // used to generate random number from current seed and update seed
 const unsigned long maxshort  = 65536L;

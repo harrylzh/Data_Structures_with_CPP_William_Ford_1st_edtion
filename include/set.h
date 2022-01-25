@@ -6,105 +6,123 @@
 
 enum ErrorType
 {
-    InvalidMember, ExpectRightBrace, MissingValue,
-    MissingComma, InvalidChar, MissingLeftBrace,
-    InvalidInputData, EndOfFile, OutOfMemory,
-    InvalidMemberRef, SetsDifferentSize
+    InvalidMember,
+    ExpectRightBrace,
+    MissingValue,
+    MissingComma,
+    InvalidChar,
+    MissingLeftBrace,
+    InvalidInputData,
+    EndOfFile,
+    OutOfMemory,
+    InvalidMemberRef,
+    SetsDifferentSize
 };
 
 template <class T>
-class Set 
+class Set
 {
-    private:
-        // max number of elements in the set
-        int setrange;
-        
-        // number of bytes in bit array and the array pointer
-        int arraysize;
-        unsigned short *member;
-        
-        // fatal error utility function
-        void Error(ErrorType n) const;
-        
-        // implement the mapping of set elements to bits
-        // within 16-bit short integers
-        int ArrayIndex(const T& elt) const;
-        unsigned short BitMask(const T& elt) const;
-    
-    public:
-        // constructor. create an empty set
-        Set(int setrange);
-        
-        // copy constructor
-        Set(const Set<T>& x);
-        
-        // destructor
-        ~Set(void);
-        
-        // assignment operator
-        Set<T>& operator= (const Set<T>& rhs);
-               
-        // element membership
-        int IsMember(const T& elt);
+private:
+    // number of bytes in bit array and the array pointer
+    int arraysize;
 
-        // set equality
-        int operator== (const Set<T>& x) const;
+    // fatal error utility function
+    void Error(ErrorType n) const;
 
-        // set union
-        Set operator+ (const Set<T>& x) const;
-        // set intersection
-        Set operator* (const Set<T>& x) const;
-        
-        // set insertion/deletion operations
-        void Insert(const T& elt);
-        void Delete(const T& elt);
+    // implement the mapping of set elements to bits
+    // within 16-bit short integers
 
-        // Set stream I/O operators
-        friend std::istream& operator>> (std::istream& istr,
-                                    Set<T>& x);             
-        friend std::ostream& operator<< (std::ostream& ostr,
-                                    const Set<T>& x);
+public:
+    int ArrayIndex(const T &elt) const;
+    unsigned short BitMask(const T &elt) const;
+    unsigned short *member;
+    // max number of elements in the set
+    int setrange;
+    // constructor. create an empty set
+    Set(int setrange);
+
+    // copy constructor
+    Set(const Set<T> &x);
+
+    // destructor
+    ~Set(void);
+
+    // assignment operator
+    Set<T> &operator=(const Set<T> &rhs);
+
+    // element membership
+    int IsMember(const T &elt);
+
+    // set equality
+    int operator==(const Set<T> &x) const;
+
+    // set union
+    Set operator+(const Set<T> &x) const;
+    // set intersection
+    Set operator*(const Set<T> &x) const;
+
+    // set insertion/deletion operations
+    void Insert(const T &elt);
+    void Delete(const T &elt);
+
+    // template <class D>
+    // friend std::ostream& operator<<(std::ostream &out, Set<D> &obj);
+
+    // Set stream I/O operators
+    template <class D>
+    friend std::istream &operator>>(std::istream &istr,
+                                    Set<D> &);
+    template <class D>
+    friend std::ostream &operator<<(std::ostream &ostr,
+                                    const Set<T> &);
 };
 
+// template <class D>
+// std::ostream& operator<<(std::ostream &out, Set<D> &obj)
+// {
+
+//     return out ;
+// }
+
 template <class T>
-void Set<T>::Error (ErrorType n) const
+void Set<T>::Error(ErrorType n) const
 {
     std::cout << std::endl;
-    switch(n)
+    switch (n)
     {
-        case InvalidMember:     
-                    std::cerr << "Invalid set member";
-                    break;
-        case ExpectRightBrace:  
-                    std::cerr << "Expect right brace '}'";
-                    break;
-        case MissingValue:      
-                    std::cerr << "Missing a value after a comma";
-                    break;
-        case MissingComma:      
-                    std::cerr << "Separate members with a comma";
-                    break;
-        case InvalidChar:       
-                    std::cerr << "Invalid set character";
-                    break;
-        case MissingLeftBrace:  
-                    std::cerr << "Missing left brace '{'";
-                    break;
-        case InvalidInputData:  
-                    std::cerr << "Invalid input data element";
-                    break;
-        case EndOfFile:         
-                    std::cerr << "Premature end of file";
-                    break;
-        case OutOfMemory:  
-                    std::cerr << "Memory allocation failure";
-                    break;
-        case InvalidMemberRef:  
-                    std::cerr << "Invalid member reference";
-                    break;
-        case SetsDifferentSize:  
-                    std::cerr << "Sets are not the same size";
-                    break;
+    case InvalidMember:
+        std::cerr << "Invalid set member";
+        break;
+    case ExpectRightBrace:
+        std::cerr << "Expect right brace '}'";
+        break;
+    case MissingValue:
+        std::cerr << "Missing a value after a comma";
+        break;
+    case MissingComma:
+        std::cerr << "Separate members with a comma";
+        break;
+    case InvalidChar:
+        std::cerr << "Invalid set character";
+        break;
+    case MissingLeftBrace:
+        std::cerr << "Missing left brace '{'";
+        break;
+    case InvalidInputData:
+        std::cerr << "Invalid input data element";
+        break;
+    case EndOfFile:
+        std::cerr << "Premature end of file";
+        break;
+    case OutOfMemory:
+        std::cerr << "Memory allocation failure";
+        break;
+    case InvalidMemberRef:
+        std::cerr << "Invalid member reference";
+        break;
+    case SetsDifferentSize:
+        std::cerr << "Sets are not the same size";
+        break;
     }
     std::cout << std::endl;
     exit(1);
@@ -113,7 +131,7 @@ void Set<T>::Error (ErrorType n) const
 // determine the index of the array element
 // containing the bit representing elt
 template <class T>
-int Set<T>::ArrayIndex(const T& elt) const
+int Set<T>::ArrayIndex(const T &elt) const
 {
     // convert elt to int and shift
     return int(elt) >> 4;
@@ -122,7 +140,7 @@ int Set<T>::ArrayIndex(const T& elt) const
 // create an unsigned short value with a 1 in the
 // bit position of elt
 template <class T>
-unsigned short Set<T>::BitMask(const T& elt) const
+unsigned short Set<T>::BitMask(const T &elt) const
 {
     // use & to find remainder after dividing by
     // 16. 0 stays in right-most bit, 15 goes on far left
@@ -131,32 +149,32 @@ unsigned short Set<T>::BitMask(const T& elt) const
 
 // constructor. create an empty set
 template <class T>
-Set<T>::Set(int sz): setrange(sz)
+Set<T>::Set(int sz) : setrange(sz)
 {
     // number of unsigned shorts needed to hold set elements
-    arraysize = (setrange+15) >> 4;
-    
+    arraysize = (setrange + 15) >> 4;
+
     // allocate the array
-    member = new unsigned short [arraysize];
+    member = new unsigned short[arraysize];
     if (member == NULL)
         Error(OutOfMemory);
-        
+
     // create an empty set by setting all bits to 0
     for (int i = 0; i < arraysize; i++)
         member[i] = 0;
 }
 
 template <class T>
-Set<T>::Set(const Set<T>& x)
+Set<T>::Set(const Set<T> &x)
 {
     setrange = x.setrange;
     arraysize = x.arraysize;
-    
+
     // allocate the array
-    member = new unsigned short [arraysize];
+    member = new unsigned short[arraysize];
     if (member == NULL)
         Error(OutOfMemory);
-        
+
     // copy set elements from x
     for (int i = 0; i < arraysize; i++)
         member[i] = x.member[i];
@@ -165,15 +183,15 @@ Set<T>::Set(const Set<T>& x)
 template <class T>
 Set<T>::~Set(void)
 {
-    delete [] member;
+    delete[] member;
 }
 
 template <class T>
-Set<T>& Set<T>::operator= (const Set<T>& rhs)
+Set<T> &Set<T>::operator=(const Set<T> &rhs)
 {
     if (setrange != rhs.setrange)
         Error(SetsDifferentSize);
-        
+
     // copy set elements from rhs
     for (int i = 0; i < arraysize; i++)
         member[i] = rhs.member[i];
@@ -182,78 +200,78 @@ Set<T>& Set<T>::operator= (const Set<T>& rhs)
 
 // determine whether elt is in the set
 template <class T>
-int Set<T>::IsMember(const T& elt)
+int Set<T>::IsMember(const T &elt)
 {
     // is int(elt) in range 0 to setrange-1 ?
     if (int(elt) < 0 || int(elt) >= setrange)
         Error(InvalidMemberRef);
 
-	// return the bit corresponding to elt
+    // return the bit corresponding to elt
     return member[ArrayIndex(elt)] & BitMask(elt);
 }
 
 // determine if the current set and x are equal
 template <class T>
-int Set<T>::operator== (const Set<T>& x) const
+int Set<T>::operator==(const Set<T> &x) const
 {
-	int retval = 1;
-	
-	// the sets must have the same range
+    int retval = 1;
+
+    // the sets must have the same range
     if (setrange != x.setrange)
         Error(SetsDifferentSize);
 
-	for(int i=0;i < arraysize;i++)
-		if (member[i] != x.member[i])
-		{
-			retval = 0;
-			break;
-		}
-	return retval;
+    for (int i = 0; i < arraysize; i++)
+        if (member[i] != x.member[i])
+        {
+            retval = 0;
+            break;
+        }
+    return retval;
 }
 
 // form and return the union of the current Set
 // object and object x
 template <class T>
-Set<T> Set<T>::operator+ (const Set<T>& x) const
+Set<T> Set<T>::operator+(const Set<T> &x) const
 {
-	// the sets must have the same range
+    // the sets must have the same range
     if (setrange != x.setrange)
         Error(SetsDifferentSize);
-        
-	// form the union in tmp
+
+    // form the union in tmp
     Set<T> tmp(setrange);
 
-	// each array element of tmp is the bitwise
-	// OR of the current object and x
+    // each array element of tmp is the bitwise
+    // OR of the current object and x
     for (int i = 0; i < arraysize; i++)
         tmp.member[i] = member[i] | x.member[i];
-        
+
     // return the union
     return tmp;
 }
 
 template <class T>
-Set<T> Set<T>::operator* (const Set<T>& x) const
+Set<T> Set<T>::operator*(const Set<T> &x) const
 {
-	// the sets must have the same range
+    // the sets must have the same range
     if (setrange != x.setrange)
         Error(SetsDifferentSize);
-        
-	// form the intersection in tmp
+
+    // form the intersection in tmp
     Set<T> tmp(setrange);
 
-	// each array element of tmp is the bitwise
-	// AND of the current object and x
+    // each array element of tmp is the bitwise
+    // AND of the current object and x
     for (int i = 0; i < arraysize; i++)
         tmp.member[i] = member[i] & x.member[i];
-        
+
     // return the intersection
     return tmp;
 }
 
 // insert elt into the set
 template <class T>
-void Set<T>::Insert(const T& elt)
+void Set<T>::Insert(const T &elt)
 {
     // is int(elt) in range 0 to setrange-1 ?
     if (int(elt) < 0 || int(elt) >= setrange)
@@ -265,7 +283,7 @@ void Set<T>::Insert(const T& elt)
 
 // delete elt from the set
 template <class T>
-void Set<T>::Delete(const T& elt)
+void Set<T>::Delete(const T &elt)
 {
     // is int(elt) in range 0 to setrange-1 ?
     if (int(elt) < 0 || int(elt) >= setrange)
@@ -277,12 +295,12 @@ void Set<T>::Delete(const T& elt)
     member[ArrayIndex(elt)] &= ~BitMask(elt);
 }
 
-template <class T>
-std::istream& operator>> (std::istream& istr, Set<T>& x)
+template <class D>
+std::istream &operator>>(std::istream &istr, Set<D> &x)
 {
     char c;
     int haveComma = 0, needComma = 0;
-    T elt;
+    D elt;
     int i;
 
     for (i = 0; i < x.arraysize; i++)
@@ -291,50 +309,55 @@ std::istream& operator>> (std::istream& istr, Set<T>& x)
     // skip leading white space
     c = ' ';
     while (c == ' ' || c == '\t' || c == '\n')
-        if (istr.get(c) == 0)
+        // if (istr.get(c) == 0)
+        if (istr.eof())
             x.Error(EndOfFile);
     if (c != '{')
         x.Error(MissingLeftBrace);
 
-    if (istr.get(c) == 0)
+    // if (istr.get(c) == 0)
+    if (istr.eof())
         x.Error(EndOfFile);
-        
+
     while (c != '}')
     {
-        switch(c)
+        switch (c)
         {
-            case ' ':
-            case '\t':                  
-            case '\n':  break;
-        
-            case '{':   x.Error(ExpectRightBrace);
-                        break;
-        
-            case ',':   if (haveComma == 1)
-                            x.Error(MissingValue);
-                        else
-                        {
-                            haveComma = 1;
-                            needComma = 0;
-                        }
-                        break;
-        
-            default:
-                        if (needComma)
-                            x.Error(MissingComma);
-                        istr.putback(c);
-                        if(istr >> elt == 0)
-                            x.Error(InvalidInputData);
-                        if (int(elt) < 0 ||
-                            int(elt) >= x.setrange)
-                                x.Error(InvalidInputData);
-                        x.member[x.ArrayIndex(elt)]
-                                        |= x.BitMask(elt);
-                        needComma = 1;
-                        haveComma = 0;
-                        break;
+        case ' ':
+        case '\t':
+        case '\n':
+            break;
+
+        case '{':
+            x.Error(ExpectRightBrace);
+            break;
+
+        case ',':
+            if (haveComma == 1)
+                x.Error(MissingValue);
+            else
+            {
+                haveComma = 1;
+                needComma = 0;
+            }
+            break;
+
+        default:
+            if (needComma)
+                x.Error(MissingComma);
+            istr.putback(c);
+            // if (istr >> elt == 0)
+            //     x.Error(InvalidInputData);
+            if (int(elt) < 0 ||
+                int(elt) >= x.setrange)
+                x.Error(InvalidInputData);
+            x.member[x.ArrayIndex(elt)] |= x.BitMask(elt);
+            needComma = 1;
+            haveComma = 0;
+            break;
         }
-        if (istr.get(c) == 0)
+        // if (istr.get(c) == 0)
+        if (istr.eof())
             x.Error(EndOfFile);
     }
     if (haveComma == 1)
@@ -342,22 +365,22 @@ std::istream& operator>> (std::istream& istr, Set<T>& x)
     return istr;
 }
 
-template <class T>
-std::ostream& operator<< (std::ostream& ostr, const Set<T>& x)
+template <class D>
+std::ostream &operator<<(std::ostream &ostr, const Set<D> &x)
 {
     int i, j, setElt;
     int needComma = 0;
-    T elt;
-    
+    D elt;
+
     ostr << "{";
 
     for (setElt = 0; setElt < x.setrange; setElt++)
     {
-    if (x.member[x.ArrayIndex(T(setElt))] &
-        x.BitMask(T(setElt)))
+        if (x.member[x.ArrayIndex(D(setElt))] &
+            x.BitMask(D(setElt)))
         {
-            elt = T(setElt);
-           if (needComma == 1)
+            elt = D(setElt);
+            if (needComma == 1)
                 ostr << ", " << elt;
             else
             {
@@ -370,4 +393,4 @@ std::ostream& operator<< (std::ostream& ostr, const Set<T>& x)
     return ostr;
 }
 
-#endif  // SET_CLASS
+#endif // SET_CLASS

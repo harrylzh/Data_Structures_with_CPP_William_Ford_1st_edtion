@@ -9,7 +9,7 @@ class House
       // constructor. initialize id to "House"
       House(void)
       {
-         id = "House";
+         id = (char*)"House";
       }
       
       // virtual method.   prints the string "House"
@@ -28,7 +28,7 @@ class WoodFrameHouse: public House
       // constructor. assign id = "Wood Frame"
       WoodFrameHouse(void): House()
       {
-         id = "Wood Frame";
+         id = (char*)"Wood Frame";
       }
       
       // virtual method. print id and call Paint in base class
@@ -48,7 +48,7 @@ class StuccoHouse: public House
       // constructor. assign id = "Stucco"
       StuccoHouse(void): House()
       {
-         id = "Stucco";
+         id = (char*)"Stucco";
       }
       
       // virtual method. print id and call Paint in base class
@@ -68,7 +68,7 @@ class VinylSidedHouse: public House
       // constructor. assign id = "Vinyl Sided"
       VinylSidedHouse(void): House()
       {
-         id = "Vinyl Sided";
+         id = (char*)"Vinyl Sided";
       }
       
       // virtual method. print id and call Paint in base class

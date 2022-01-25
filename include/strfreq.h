@@ -6,7 +6,7 @@ struct NameRecord
 };
 
 // function for use by the Hash class
-unsigned long hash(NameRecord elem)
+unsigned long hashRecord(NameRecord elem)
 {
    unsigned long hashval = 0;
 
@@ -21,4 +21,3 @@ int operator== (const NameRecord& x, const NameRecord& y)
 {
    return x.name == y.name;
 }
-

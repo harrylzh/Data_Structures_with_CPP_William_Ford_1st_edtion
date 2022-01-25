@@ -13,8 +13,8 @@ enum ErrorType
 
 char *errorMsg[] =
 {
-    "Invalid array size", "Memory allocation error",
-    "Invalid index: "
+    (char*)"Invalid array size", (char*)"Memory allocation error",
+    (char*)"Invalid index: "
 };
 
 template <class T> 

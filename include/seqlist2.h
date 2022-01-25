@@ -51,7 +51,7 @@ template <class T>
 void SeqList<T>::ClearList(void)
 {
    llist.ClearList();
-   size = 0;
+   this->size = 0;   
 }
 
 // use method InsertRear to add item at the rear of the list
@@ -59,14 +59,14 @@ template <class T>
 void SeqList<T>::Insert(const T& item)
 {
    llist.InsertRear(item);
-   size++;	// update size in List
+   this->size++;	// update size in List
 }
 
 // use method DeleteFront to remove first item from the list
 template <class T>
 T SeqList<T>::DeleteFront(void)
 {
-   size--;
+   this->size--;
    return llist.DeleteFront();
 }
    
@@ -88,7 +88,7 @@ void SeqList<T>::Delete(const T& item)
    if (result)
    {
       llist.DeleteAt();
-      size--;
+      this->size--;
    } 
 }
 
@@ -162,7 +162,7 @@ SeqListIterator<T>::SeqListIterator(SeqList<T>& lst):
       Iterator<T>(), listPtr(&lst)
 {
    // account for the fact that the list could be empty
-   iterationComplete = listPtr->llist.ListEmpty();
+   this->iterationComplete = listPtr->llist.ListEmpty();
    // position the iterator at the front of the list
    Reset();
 }
@@ -182,7 +182,7 @@ void SeqListIterator<T>::Next(void)
    // if we have arrived at end of linked list, signal that
    // iteration is complete
    if (currPtr == NULL)
-      iterationComplete = 1;
+      this->iterationComplete = 1;
 }
 
 // move to the beginning of the list
@@ -190,7 +190,7 @@ template <class T>
 void SeqListIterator<T>::Reset(void)
 {
    // reasssign the state of the iteration
-   iterationComplete = listPtr->llist.ListEmpty();
+   this->iterationComplete = listPtr->llist.ListEmpty();
    
    // if the list is empty, return
    if (listPtr->llist.front == NULL)

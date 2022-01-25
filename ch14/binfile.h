@@ -101,7 +101,7 @@ BinFile<T>::BinFile(const String& fileName, Access atype)
       f.open(fileName, std::ios::in | std::ios::out | std::ios::binary);
 #endif // __THINKC__
    if(!f)
-      Error("BinFile constructor: file cannot be opened");
+      Error((char*)"BinFile constructor: file cannot be opened");
    else
       fileOpen = 1;
       
@@ -137,7 +137,7 @@ BinFile<T>::BinFile(const String& fileName, Access atype)
 template <class T>
 BinFile<T>::BinFile(BinFile<T>& bf)
 {
-   Error("Pass file parameter by reference only");
+   Error((char*)"Pass file parameter by reference only");
 }  
 
 // destructor. close the file.
@@ -155,7 +155,7 @@ template <class T>
 void BinFile<T>::Reset(void)
 {
    if(!fileOpen)
-      Error("BinFile Reset: file closed");
+      Error((char*)"BinFile Reset: file closed");
       
    if (accessType == OUT)
       f.seekp(0,std::ios::beg);
@@ -169,11 +169,12 @@ template <class T>
 long BinFile<T>::Seek(long pos, SeekType mode)
 {
    // the seekg or seekp param
-   std::ios::seek_dir fromWhere;
+   // std::ios_base::seek_dir fromWhere;   
+   std::ios_base::seekdir fromWhere;
    long retval;
    
    if(!fileOpen)
-      Error("BinFile Seek: file closed");
+      Error((char*)"BinFile Seek: file closed");
 
    // assign fromWhere according to mode
    switch(mode)
@@ -206,10 +207,10 @@ template <class T>
 void BinFile<T>::Clear(void)
 {
    if (!fileOpen)
-		Error("BinFile Clear: file closed");
+		Error((char*)"BinFile Clear: file closed");
    // an 'IN' file cannot be cleared
    if (accessType == IN)
-      Error("Invalid file access operation");
+      Error((char*)"Invalid file access operation");
 
    // close and then open the file
    f.close();
@@ -226,7 +227,7 @@ void BinFile<T>::Clear(void)
       f.open(fname, std::ios::in | std::ios::out | std::ios::trunc | std::ios::binary);
 #endif // __THINKC__
    if (!f)
-      Error("BinFile Clear: cannot reopen the file");
+      Error((char*)"BinFile Clear: cannot reopen the file");
       
    fileSize = 0;
 }
@@ -248,7 +249,7 @@ template <class T>
 void BinFile<T>::Delete(void)
 {
    if (!fileOpen)
-	  Error("BinFile Delete: file closed");
+	  Error((char*)"BinFile Delete: file closed");
 
    // close the file
    f.close();
@@ -262,7 +263,7 @@ template <class T>
 long BinFile<T>::Size(void)
 {
    if(!fileOpen)
-      Error("BinFile Size: file closed");
+      Error((char*)"BinFile Size: file closed");
    return fileSize;
 }
 
@@ -270,7 +271,7 @@ template <class T>
 int BinFile<T>::EndFile(void)
 {
    if(!fileOpen)
-      Error("BinFile EndFile: file closed");
+      Error((char*)"BinFile EndFile: file closed");
 
    return f.eof();
 }
@@ -279,12 +280,12 @@ template <class T>
 void BinFile<T>::Write (const T& data, long pos)
 {
    if(!fileOpen)
-      Error("BinFile Write(T data,int pos): file closed");
+      Error((char*)"BinFile Write(T data,int pos): file closed");
 
    if (accessType == IN)
-      Error("Invalid file access operation");
+      Error((char*)"Invalid file access operation");
    else if (pos < 0)
-      Error ("Invalid file access operation"); 
+      Error ((char*)"Invalid file access operation"); 
    f.seekp(pos*Tsize, std::ios::beg);
    f.write((char *)&data,Tsize);
    f.seekg(0,std::ios::end);
@@ -296,10 +297,10 @@ template <class T>
 void BinFile<T>::Append(T data)
 {
    if(!fileOpen)
-      Error("BinFile Append: file closed");
+      Error((char*)"BinFile Append: file closed");
 
    if (accessType == IN)
-      Error("Invalid file access operation");
+      Error((char*)"Invalid file access operation");
    if (accessType == OUT)
 	f.seekp(0, std::ios::end);
    else
@@ -316,14 +317,14 @@ T BinFile<T>::Read (long pos)
    T data;
 
    if(!fileOpen)
-      Error("BinFile Read(int pos): file closed");
+      Error((char*)"BinFile Read(int pos): file closed");
 
    // the Read method is invalid with an 'OUT' only file
    if (accessType == OUT)
-      Error("Invalid file access operation");
+      Error((char*)"Invalid file access operation");
    // test for valid pos in range 0 to fileSize-1
    else if (pos < 0 || pos >= fileSize)
-      Error("Invalid file access operation");
+      Error((char*)"Invalid file access operation");
 
    // position the current file pointer and extract data
    // using the fstream read method
@@ -346,12 +347,12 @@ T BinFile<T>::Peek (void)
    T data;
    
    if(!fileOpen)
-      Error("BinFile Peek: file closed");
+      Error((char*)"BinFile Peek: file closed");
 
    if (accessType == OUT)
-      Error("Invalid file access operation");
+      Error((char*)"Invalid file access operation");
    else if (fileSize == 0)
-      Error("File is empty");
+      Error((char*)"File is empty");
    f.read((char *)&data,Tsize);
    f.seekg(-Tsize, std::ios::cur);
    return data;
@@ -364,12 +365,12 @@ int BinFile<T>::Read(T *A, int n)
    int nread;
 
    if (accessType == OUT)
-      Error("Invalid file access operation");
+      Error((char*)"Invalid file access operation");
    else if (n < 0) 
-      Error("Invalid record count");
+      Error((char*)"Invalid record count");
    
    if(!fileOpen)
-      Error("BinFile Read(T *A, int n): file closed");
+      Error((char*)"BinFile Read(T *A, int n): file closed");
 
    currpos = f.tellg()/Tsize;
    if (n == 0 || currpos == fileSize)
@@ -396,10 +397,10 @@ void BinFile<T>::Write(T *A, int n)
 
    // Write is an invalid operation with an 'IN' only file 
    if (accessType == IN)
-      Error("Invalid file access operation");
+      Error((char*)"Invalid file access operation");
    
    if(!fileOpen)
-      Error("BinFile Write(T *A, int n): file closed");
+      Error((char*)"BinFile Write(T *A, int n): file closed");
 
    // compute the new file size. call tellg to compute number
    // of file records prior to output point. determine if
@@ -417,7 +418,7 @@ template <class T>
 void BinFile<T>::Close(void)
 {
    if (!fileOpen)
-	  Error("BinFile Close: file closed");
+	  Error((char*)"BinFile Close: file closed");
 
    f.close();
    fileOpen = 0;

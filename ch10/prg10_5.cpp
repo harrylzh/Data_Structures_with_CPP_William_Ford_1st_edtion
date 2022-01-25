@@ -26,9 +26,9 @@ int main()
 {
     // number of disks and the peg names
     int n;
-    String startpeg = "start ", 
-           middlepeg = "middle", 
-           endpeg = "end   ";
+    String startpeg = (char*)"start ", 
+           middlepeg = (char*)"middle", 
+           endpeg = (char*)"end   ";
 
     // prompt for n and solve the puzzle for n disks
     cout << "Enter the number of disks: ";

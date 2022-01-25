@@ -13,7 +13,7 @@ int main()
     // three different array types
     int     list[10] = {5, 9, 1, 3, 4, 8, 2, 0, 7, 6};
     Student studlist[3] = {{1000, 3.4},{1555, 2.6},{1625, 3.8}};
-    char    *strlist[5] = {"zero","one","two","three","four"};
+    char    *strlist[5] = {(char*)"zero",(char*)"one",(char*)"two",(char*)"three",(char*)"four"};
     
     int     i, index;
     // this record is used as key to search array studlist
@@ -29,7 +29,7 @@ int main()
     	 << endl;
 
     cout << "String 'two' is at index "
-    	 << SeqSearch(strlist,5,"two") << endl;
+    	 << SeqSearch(strlist,5,(char*)"two") << endl;
 }
 
 /*

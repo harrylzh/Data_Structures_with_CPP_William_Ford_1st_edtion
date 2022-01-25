@@ -9,16 +9,17 @@ using namespace std;
 
 // creates a new string with all blank characters removed
 void Deblank(char *s, char *t)
-{
+{    
+    
     // loop through expression until NULL character is found
-    while(*s != NULL)
+    while(*s != '\0')    
     {
         // if character is a non-blank, copy to new string
         if (*s != ' ')
             *t++ = *s;
         s++;            // move to next character
     }
-    *t = NULL;          // append NULL to new string
+    *t = '\0';          // append NULL to new string
 }
 
 int main(void)
